@@ -1,27 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bone: #e8e0d0;
+  --ash: #a09a8e;
+  --char: #111010;
+  --ink: #0a0909;
+  --flare: #c8ff00;
+  --rust: #d94f2b;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: 'Space Mono', monospace;
+  cursor: crosshair;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+::selection {
+  background: var(--flare);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--flare);
+}
+
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 18s linear infinite;
+  white-space: nowrap;
+  display: flex;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.fade-up-delay-1 { animation-delay: 0.15s; opacity: 0; }
+.fade-up-delay-2 { animation-delay: 0.3s; opacity: 0; }
+.fade-up-delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+/* Glitch effect */
+@keyframes glitch1 {
+  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+  25% { clip-path: inset(40% 0 50% 0); transform: translate(3px, 0); }
+  50% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+  75% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); }
+}
+
+@keyframes glitch2 {
+  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translate(3px, 0); }
+  25% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 0); }
+  50% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
+  75% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 0); }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.glitch::before {
+  color: var(--rust);
+  animation: glitch1 3.5s infinite steps(1);
+}
+
+.glitch::after {
+  color: var(--flare);
+  animation: glitch2 3.5s infinite steps(1);
+  animation-delay: 0.08s;
+}
+
+/* Hover line underline */
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--flare);
+  transition: width 0.3s ease;
+}
+
+.hover-line:hover::after {
+  width: 100%;
+}
+
+/* Card hover */
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
 }
