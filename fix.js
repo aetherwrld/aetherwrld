@@ -1,49 +1,183 @@
 const fs = require('fs');
 
-const nav = `'use client'
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+const css = `@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
-export default function Nav() {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+:root {
+  --bone: #e8e0d0;
+  --ash: #a09a8e;
+  --char: #111010;
+  --ink: #0a0909;
+  --flare: #c8ff00;
+  --rust: #d94f2b;
+}
 
-  const links = ['Products', 'About', 'Contact']
+* {
+  box-sizing: border-box;
+}
 
-  return (
-    <nav className={\`fixed top-0 left-0 right-0 z-50 transition-all duration-500 \${scrolled ? 'bg-[#0a0909]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}\`}>
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="flex items-center">
-          <Image src="/logo.png" alt="AETHERWRLD" width={140} height={50} className="object-contain" />
-        </a>
-        <div className="hidden md:flex items-center gap-10">
-          {links.map((link) => (
-            <a key={link} href={\`#\${link.toLowerCase()}\`} className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">{link}</a>
-          ))}
-          <a href="#contact" className="text-xs tracking-[0.2em] uppercase px-5 py-2.5 border border-[#c8ff00] text-[#c8ff00] hover:bg-[#c8ff00] hover:text-[#0a0909] transition-all duration-300">Shop Now</a>
-        </div>
-        <button className="md:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(!menuOpen)}>
-          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'rotate-45 translate-y-2' : ''}\`} />
-          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'opacity-0' : ''}\`} />
-          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? '-rotate-45 -translate-y-2' : ''}\`} />
-        </button>
-      </div>
-      <div className={\`md:hidden transition-all duration-500 overflow-hidden \${menuOpen ? 'max-h-60' : 'max-h-0'}\`}>
-        <div className="px-6 pb-6 flex flex-col gap-6 border-t border-white/5">
-          {links.map((link) => (
-            <a key={link} href={\`#\${link.toLowerCase()}\`} onClick={() => setMenuOpen(false)} className="text-sm tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors pt-4">{link}</a>
-          ))}
-        </div>
-      </div>
-    </nav>
-  )
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+::selection {
+  background: var(--flare);
+  color: var(--ink);
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--flare);
+}
+
+.font-display {
+  font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
+}
+
+p, li, input, textarea, a {
+  line-height: 1.6;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 18s linear infinite;
+  white-space: nowrap;
+  display: flex;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fadeUp 0.9s ease forwards;
+}
+
+.fade-up-delay-1 { animation-delay: 0.15s; opacity: 0; }
+.fade-up-delay-2 { animation-delay: 0.3s; opacity: 0; }
+.fade-up-delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+@keyframes glitch1 {
+  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+  25% { clip-path: inset(40% 0 50% 0); transform: translate(3px, 0); }
+  50% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
+  75% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); }
+}
+
+@keyframes glitch2 {
+  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translate(3px, 0); }
+  25% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 0); }
+  50% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
+  75% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 0); }
+}
+
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.glitch::before {
+  color: var(--rust);
+  animation: glitch1 3.5s infinite steps(1);
+}
+
+.glitch::after {
+  color: var(--flare);
+  animation: glitch2 3.5s infinite steps(1);
+  animation-delay: 0.08s;
+}
+
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--flare);
+  transition: width 0.3s ease;
+}
+
+.hover-line:hover::after {
+  width: 100%;
+}
+
+.product-card:hover .product-overlay {
+  opacity: 1;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Consistent section spacing */
+.section-pad {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }`;
 
-fs.writeFileSync('components/Nav.tsx', nav, 'utf8');
-console.log('Nav updated!');
+fs.writeFileSync('app/globals.css', css, 'utf8');
+console.log('CSS updated!');

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,12 +24,13 @@ html {
 body {
   background-color: var(--ink);
   color: var(--bone);
-  font-family: 'Space Mono', monospace;
-  cursor: crosshair;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
   overflow-x: hidden;
+  cursor: crosshair;
 }
 
-/* Grain overlay */
 body::before {
   content: '';
   position: fixed;
@@ -57,9 +58,13 @@ body::before {
 
 .font-display {
   font-family: 'Bebas Neue', sans-serif;
+  line-height: 1;
 }
 
-/* Marquee animation */
+p, li, input, textarea, a {
+  line-height: 1.6;
+}
+
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -71,7 +76,6 @@ body::before {
   display: flex;
 }
 
-/* Fade up animation */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -91,7 +95,6 @@ body::before {
 .fade-up-delay-2 { animation-delay: 0.3s; opacity: 0; }
 .fade-up-delay-3 { animation-delay: 0.45s; opacity: 0; }
 
-/* Glitch effect */
 @keyframes glitch1 {
   0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
   25% { clip-path: inset(40% 0 50% 0); transform: translate(3px, 0); }
@@ -129,7 +132,6 @@ body::before {
   animation-delay: 0.08s;
 }
 
-/* Hover line underline */
 .hover-line {
   position: relative;
   display: inline-block;
@@ -150,11 +152,27 @@ body::before {
   width: 100%;
 }
 
-/* Card hover */
 .product-card:hover .product-overlay {
   opacity: 1;
 }
 
 .product-card:hover img {
   transform: scale(1.05);
+}
+
+/* Consistent section spacing */
+.section-pad {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-pad {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
