@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -15,8 +16,10 @@ export default function Nav() {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0909]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-        <a href="#" className="font-display text-2xl tracking-widest text-[#e8e0d0] hover:text-[#c8ff00] transition-colors">AETHERWRLD</a>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="#" className="flex items-center">
+          <Image src="/logo.png" alt="AETHERWRLD" width={140} height={50} className="object-contain" />
+        </a>
         <div className="hidden md:flex items-center gap-10">
           {links.map((link) => (
             <a key={link} href={`#${link.toLowerCase()}`} className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">{link}</a>

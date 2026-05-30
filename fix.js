@@ -1,41 +1,49 @@
 const fs = require('fs');
 
-const waitlist = `export default function Waitlist() {
+const nav = `'use client'
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const links = ['Products', 'About', 'Contact']
+
   return (
-    <section className="py-32 px-6 bg-[#111010] relative overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
-        <span className="font-display text-[20vw] leading-none text-white/[0.02] tracking-tighter">DROP</span>
+    <nav className={\`fixed top-0 left-0 right-0 z-50 transition-all duration-500 \${scrolled ? 'bg-[#0a0909]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}\`}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="#" className="flex items-center">
+          <Image src="/logo.png" alt="AETHERWRLD" width={140} height={50} className="object-contain" />
+        </a>
+        <div className="hidden md:flex items-center gap-10">
+          {links.map((link) => (
+            <a key={link} href={\`#\${link.toLowerCase()}\`} className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">{link}</a>
+          ))}
+          <a href="#contact" className="text-xs tracking-[0.2em] uppercase px-5 py-2.5 border border-[#c8ff00] text-[#c8ff00] hover:bg-[#c8ff00] hover:text-[#0a0909] transition-all duration-300">Shop Now</a>
+        </div>
+        <button className="md:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'rotate-45 translate-y-2' : ''}\`} />
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'opacity-0' : ''}\`} />
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? '-rotate-45 -translate-y-2' : ''}\`} />
+        </button>
       </div>
-      <div className="max-w-2xl mx-auto relative text-center">
-        <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-6">First Access</span>
-        <h2 className="font-display text-6xl md:text-8xl leading-none text-[#e8e0d0] mb-6">
-          JOIN THE<br />WAITLIST.
-        </h2>
-        <p className="text-[#a09a8e] text-sm tracking-wide mb-12 max-w-sm mx-auto leading-relaxed">
-          Be the first to know when we drop. No spam. Just the drop date, the pieces, and the link.
-        </p>
-        <form action="https://app.us10.list-manage.com/subscribe/post?u=1ca3255ec5b1df13a9e990502&amp;id=998325b48b&amp;f_id=00c22ce2f0" method="post" target="_blank" className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto">
-          <input
-            type="email"
-            name="EMAIL"
-            placeholder="your@email.com"
-            required
-            className="flex-1 bg-transparent border border-white/10 px-6 py-4 text-sm text-[#e8e0d0] placeholder-[#a09a8e]/50 focus:outline-none focus:border-[#c8ff00]/50 transition-colors"
-          />
-          <div style={{position: 'absolute', left: '-5000px'}} aria-hidden="true">
-            <input type="text" name="b_1ca3255ec5b1df13a9e990502_998325b48b" tabIndex={-1} defaultValue="" />
-          </div>
-          <button
-            type="submit"
-            className="px-8 py-4 bg-[#c8ff00] text-[#0a0909] text-xs tracking-[0.3em] uppercase font-bold hover:bg-[#e8e0d0] transition-colors duration-300"
-          >
-            Notify Me
-          </button>
-        </form>
+      <div className={\`md:hidden transition-all duration-500 overflow-hidden \${menuOpen ? 'max-h-60' : 'max-h-0'}\`}>
+        <div className="px-6 pb-6 flex flex-col gap-6 border-t border-white/5">
+          {links.map((link) => (
+            <a key={link} href={\`#\${link.toLowerCase()}\`} onClick={() => setMenuOpen(false)} className="text-sm tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors pt-4">{link}</a>
+          ))}
+        </div>
       </div>
-    </section>
+    </nav>
   )
 }`;
 
-fs.writeFileSync('components/Waitlist.tsx', waitlist, 'utf8');
-console.log('Waitlist done!');
+fs.writeFileSync('components/Nav.tsx', nav, 'utf8');
+console.log('Nav updated!');
