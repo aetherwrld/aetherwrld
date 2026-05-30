@@ -1,183 +1,88 @@
 const fs = require('fs');
 
-const css = `@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --bone: #e8e0d0;
-  --ash: #a09a8e;
-  --char: #111010;
-  --ink: #0a0909;
-  --flare: #c8ff00;
-  --rust: #d94f2b;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--ink);
-  color: var(--bone);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  cursor: crosshair;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.35;
-}
-
-::selection {
-  background: var(--flare);
-  color: var(--ink);
-}
-
-::-webkit-scrollbar {
-  width: 3px;
-}
-::-webkit-scrollbar-track {
-  background: var(--ink);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--flare);
-}
-
-.font-display {
-  font-family: 'Bebas Neue', sans-serif;
-  line-height: 1;
-}
-
-p, li, input, textarea, a {
-  line-height: 1.6;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marquee 18s linear infinite;
-  white-space: nowrap;
-  display: flex;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-up {
-  animation: fadeUp 0.9s ease forwards;
-}
-
-.fade-up-delay-1 { animation-delay: 0.15s; opacity: 0; }
-.fade-up-delay-2 { animation-delay: 0.3s; opacity: 0; }
-.fade-up-delay-3 { animation-delay: 0.45s; opacity: 0; }
-
-@keyframes glitch1 {
-  0%, 100% { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
-  25% { clip-path: inset(40% 0 50% 0); transform: translate(3px, 0); }
-  50% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 0); }
-  75% { clip-path: inset(10% 0 80% 0); transform: translate(2px, 0); }
-}
-
-@keyframes glitch2 {
-  0%, 100% { clip-path: inset(80% 0 5% 0); transform: translate(3px, 0); }
-  25% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, 0); }
-  50% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 0); }
-  75% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 0); }
-}
-
-.glitch {
-  position: relative;
-}
-
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  font-family: 'Bebas Neue', sans-serif;
-}
-
-.glitch::before {
-  color: var(--rust);
-  animation: glitch1 3.5s infinite steps(1);
-}
-
-.glitch::after {
-  color: var(--flare);
-  animation: glitch2 3.5s infinite steps(1);
-  animation-delay: 0.08s;
-}
-
-.hover-line {
-  position: relative;
-  display: inline-block;
-}
-
-.hover-line::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--flare);
-  transition: width 0.3s ease;
-}
-
-.hover-line:hover::after {
-  width: 100%;
-}
-
-.product-card:hover .product-overlay {
-  opacity: 1;
-}
-
-.product-card:hover img {
-  transform: scale(1.05);
-}
-
-/* Consistent section spacing */
-.section-pad {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .section-pad {
-    padding-top: 9rem;
-    padding-bottom: 9rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+const hero = `export default function Hero() {
+  return (
+    <section className="relative min-h-screen flex flex-col justify-end pb-24 px-6 overflow-hidden bg-[#0a0909]">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0909] via-transparent to-[#0a0909]" style={{ zIndex: 1 }} />
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ zIndex: 0 }}>
+        <span className="font-display text-[22vw] leading-none text-white/[0.025] tracking-tighter">AETHER</span>
+      </div>
+      <div className="relative max-w-7xl mx-auto w-full" style={{ zIndex: 2 }}>
+        <div className="mb-4">
+          <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] fade-up fade-up-delay-1">New Collection Dropping</span>
+        </div>
+        <h1 className="font-display text-[15vw] md:text-[11vw] leading-[0.85] tracking-tight mb-10 fade-up fade-up-delay-2">
+          <span className="glitch block text-[#e8e0d0]" data-text="BEYOND">BEYOND</span>
+          <span className="block text-[#e8e0d0]">THE</span>
+          <span className="block text-[#c8ff00]">ORDINARY.</span>
+        </h1>
+        <div className="flex flex-col md:flex-row items-start md:items-end gap-8 fade-up fade-up-delay-3">
+          <p className="text-[#a09a8e] text-base leading-relaxed max-w-xs">Clothing for those who exist between worlds. Forged in the space between street and spirit.</p>
+          <div className="flex gap-4 items-center">
+            <a href="#products" className="group flex items-center gap-3 text-xs tracking-[0.2em] uppercase px-8 py-4 bg-[#c8ff00] text-[#0a0909] font-bold hover:bg-[#e8e0d0] transition-all duration-300">
+              Explore Collection
+              <span className="group-hover:translate-x-1 transition-transform">-&gt;</span>
+            </a>
+            <a href="#about" className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">Our Story</a>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ zIndex: 2 }}>
+        <span className="text-[9px] tracking-[0.4em] uppercase text-[#a09a8e]">Scroll</span>
+        <div className="w-px h-10 bg-gradient-to-b from-[#a09a8e] to-transparent animate-pulse" />
+      </div>
+    </section>
+  )
 }`;
 
-fs.writeFileSync('app/globals.css', css, 'utf8');
-console.log('CSS updated!');
+const about = `export default function About() {
+  const stats = [
+    { value: '2026', label: 'Founded' },
+    { value: 'INF', label: 'Worlds' },
+    { value: '01', label: 'Vision' },
+  ]
+  return (
+    <section id="about" className="py-36 px-6 bg-[#111010] relative overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        <span className="font-display text-[25vw] leading-none text-white/[0.02] tracking-tighter">WRLD</span>
+      </div>
+      <div className="max-w-7xl mx-auto relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-6">About the Brand</span>
+            <h2 className="font-display text-7xl md:text-8xl leading-none text-[#e8e0d0] mb-10">
+              BORN IN<br />THE<br /><span className="text-[#c8ff00]">IN-BETWEEN.</span>
+            </h2>
+            <div className="space-y-5 text-[#a09a8e] text-base leading-relaxed">
+              <p>AETHERWRLD is not a brand. It is a frequency. We exist in the space between street and spirit, between what you wear and who you are.</p>
+              <p>Every drop is a statement. Every stitch carries intention. We build for the ones who do not fit the mold.</p>
+              <p>This is not fast fashion. This is not hype. This is armour for the in-between.</p>
+            </div>
+            <div className="mt-12 flex gap-12">
+              {stats.map((stat) => (
+                <div key={stat.label}>
+                  <div className="font-display text-4xl text-[#e8e0d0] mb-1">{stat.value}</div>
+                  <div className="text-[11px] tracking-[0.3em] uppercase text-[#a09a8e]">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="relative">
+            <div className="aspect-[3/4] bg-[#0a0909] border border-white/5 relative overflow-hidden flex flex-col items-center justify-center gap-4 p-10 text-center">
+              <div className="font-display text-[100px] leading-none" style={{ background: 'linear-gradient(135deg, #c8ff00 0%, #a09a8e 50%, #d94f2b 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AW</div>
+              <div className="w-16 h-px bg-[#c8ff00]/30" />
+              <span className="text-[11px] tracking-[0.5em] uppercase text-[#a09a8e]">Aetherwrld Co.</span>
+            </div>
+            <div className="absolute -bottom-4 -right-4 bg-[#c8ff00] text-[#0a0909] px-5 py-3">
+              <span className="font-display text-lg tracking-wider">EST. 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}`;
+
+fs.writeFileSync('components/Hero.tsx', hero, 'utf8');
+fs.writeFileSync('components/About.tsx', about, 'utf8');
+console.log('Done!');
