@@ -1,15 +1,4 @@
-'use client'
-import { useEffect, useRef } from 'react'
-
 export default function Hero() {
-  const videoRef = useRef(null)
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {})
-    }
-  }, [])
-
   return (
     <section className="relative min-h-screen flex flex-col justify-end pb-16 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0909] via-transparent to-[#0a0909]" style={{ zIndex: 1 }} />
