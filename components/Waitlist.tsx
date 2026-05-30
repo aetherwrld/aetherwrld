@@ -1,6 +1,4 @@
-const fs = require('fs');
-
-const waitlist = `export default function Waitlist() {
+export default function Waitlist() {
   return (
     <section className="py-32 px-6 bg-[#111010] relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
@@ -35,7 +33,4 @@ const waitlist = `export default function Waitlist() {
       </div>
     </section>
   )
-}`;
-
-fs.writeFileSync('components/Waitlist.tsx', waitlist, 'utf8');
-console.log('Waitlist done!');
+}

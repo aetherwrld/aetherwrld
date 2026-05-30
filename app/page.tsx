@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import Marquee from '@/components/Marquee'
 import Products from '@/components/Products'
 import About from '@/components/About'
+import Waitlist from '@/components/Waitlist'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -14,6 +15,7 @@ export default function Home() {
       <Marquee />
       <Products />
       <About />
+      <Waitlist />
       <Contact />
       <Footer />
     </main>
