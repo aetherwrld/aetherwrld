@@ -1,16 +1,16 @@
 export default function Waitlist() {
   return (
-    <section className="py-32 px-6 bg-[#111010] relative overflow-hidden">
+    <section className="py-36 px-6 bg-[#111010] relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span className="font-display text-[20vw] leading-none text-white/[0.02] tracking-tighter">DROP</span>
       </div>
       <div className="max-w-2xl mx-auto relative text-center">
-        <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-6">First Access</span>
+        <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-6">Be First</span>
         <h2 className="font-display text-6xl md:text-8xl leading-none text-[#e8e0d0] mb-6">
-          JOIN THE<br />WAITLIST.
+          GET THE<br />DROP DATE.
         </h2>
-        <p className="text-[#a09a8e] text-sm tracking-wide mb-12 max-w-sm mx-auto leading-relaxed">
-          Be the first to know when we drop. No spam. Just the drop date, the pieces, and the link.
+        <p className="text-[#a09a8e] text-base leading-relaxed mb-12 max-w-sm mx-auto">
+          Leave your email and we will let you know the second the first drop goes live. That is it. No spam, no newsletters, just the drop.
         </p>
         <form action="https://app.us10.list-manage.com/subscribe/post?u=1ca3255ec5b1df13a9e990502&amp;id=998325b48b&amp;f_id=00c22ce2f0" method="post" target="_blank" className="flex flex-col sm:flex-row gap-0 max-w-md mx-auto">
           <input

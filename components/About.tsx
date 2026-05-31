@@ -17,9 +17,9 @@ export default function About() {
               BORN IN<br />THE<br /><span className="text-[#c8ff00]">IN-BETWEEN.</span>
             </h2>
             <div className="space-y-5 text-[#a09a8e] text-base leading-relaxed">
-              <p>AETHERWRLD is not a brand. It is a frequency. We exist in the space between street and spirit, between what you wear and who you are.</p>
-              <p>Every drop is a statement. Every stitch carries intention. We build for the ones who do not fit the mold.</p>
-              <p>This is not fast fashion. This is not hype. This is armour for the in-between.</p>
+              <p>We started AETHERWRLD because we could not find clothes that actually felt like us. Everything out there was either too basic or trying too hard.</p>
+              <p>So we made our own. Every piece is something we would wear ourselves. No hype, no gimmicks, just good clothes with a point of view.</p>
+              <p>We are just getting started. The first drop is coming and we want you there from day one.</p>
             </div>
             <div className="mt-12 flex gap-12">
               {stats.map((stat) => (

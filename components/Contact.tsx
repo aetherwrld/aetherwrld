@@ -13,43 +13,51 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 px-6 bg-[#0a0909] relative overflow-hidden">
+    <section id="contact" className="py-36 px-6 bg-[#0a0909] relative overflow-hidden">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
+          <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-6">Get In Touch</span>
           <h2 className="font-display text-7xl md:text-9xl leading-none text-[#e8e0d0] mb-6">
             TALK TO<br />US.
           </h2>
-          <p className="text-[#a09a8e] text-sm tracking-wide">
-            Email us: <a href="mailto:aetherwrldco@gmail.com" className="text-[#c8ff00] hover:text-[#e8e0d0] transition-colors">aetherwrldco@gmail.com</a>
+          <p className="text-[#a09a8e] text-base leading-relaxed">
+            Got a question, a collab idea, or just want to say what's good? Drop us a message or email us directly at{' '}
+            <a href="mailto:aetherwrldco@gmail.com" className="text-[#c8ff00] hover:text-[#e8e0d0] transition-colors">
+              aetherwrldco@gmail.com
+            </a>
           </p>
         </div>
+
         {status === 'sent' ? (
           <div className="text-center py-20 border border-white/10">
-            <p className="text-[#a09a8e] tracking-wide text-sm">Message sent. We will be in touch.</p>
+            <p className="text-[#a09a8e] tracking-wide text-base">Got it. We will get back to you soon.</p>
           </div>
         ) : (
           <div className="border border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="border-b md:border-r border-white/10">
-                <input type="text" placeholder="Your Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent px-8 py-6 text-sm text-[#e8e0d0] focus:outline-none" />
+              <div className="border-b md:border-b-0 md:border-r border-white/10">
+                <input type="text" placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-transparent px-8 py-6 text-base text-[#e8e0d0] placeholder-[#a09a8e] focus:outline-none" />
               </div>
               <div className="border-b border-white/10">
-                <input type="email" placeholder="Your Email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-transparent px-8 py-6 text-sm text-[#e8e0d0] focus:outline-none" />
+                <input type="email" placeholder="Your email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-transparent px-8 py-6 text-base text-[#e8e0d0] placeholder-[#a09a8e] focus:outline-none" />
               </div>
             </div>
             <div className="border-b border-white/10">
-              <textarea placeholder="Your message..." rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent px-8 py-6 text-sm text-[#e8e0d0] focus:outline-none resize-none" />
+              <textarea placeholder="What is on your mind?" rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full bg-transparent px-8 py-6 text-base text-[#e8e0d0] placeholder-[#a09a8e] focus:outline-none resize-none" />
             </div>
             <div>
               <button onClick={handleSubmit} className="w-full py-6 font-display text-2xl tracking-[0.3em] text-[#0a0909] bg-[#c8ff00] hover:bg-[#e8e0d0] transition-colors duration-300">
-                SEND MESSAGE
+                SEND IT
               </button>
             </div>
           </div>
         )}
+
         <div className="mt-12 flex justify-center gap-10">
           {['Instagram', 'TikTok', 'Twitter'].map((platform) => (
-            <a key={platform} href="#" className="text-[10px] tracking-[0.3em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors">{platform}</a>
+            <a key={platform} href="#" className="text-[11px] tracking-[0.3em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors">
+              {platform}
+            </a>
           ))}
         </div>
       </div>
