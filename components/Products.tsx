@@ -1,20 +1,25 @@
+import SizeGuide from './SizeGuide'
+
 const products = [
-  { id: 1, name: 'VOID OVERSIZED TEE', price: '$68', tag: 'Bestseller', color: '#c8ff00', bg: 'from-[#1a1a0e] to-[#0f0f0a]', emoji: 'O' },
-  { id: 2, name: 'WRLD CARGO PANTS', price: '$145', tag: 'New Drop', color: '#d94f2b', bg: 'from-[#1a0e0a] to-[#0f0a08]', emoji: 'O' },
-  { id: 3, name: 'AETHER HOODIE', price: '$120', tag: 'Limited', color: '#c8ff00', bg: 'from-[#0e0e1a] to-[#0a0a0f]', emoji: 'O' },
-  { id: 4, name: 'PHANTOM JACKET', price: '$220', tag: 'Coming Soon', color: '#a09a8e', bg: 'from-[#111110] to-[#0a0909]', emoji: 'O' },
+  { id: 1, name: 'VOID OVERSIZED TEE', price: '$68', tag: 'Bestseller', color: '#c8ff00', bg: 'from-[#1a1a0e] to-[#0f0f0a]' },
+  { id: 2, name: 'WRLD CARGO PANTS', price: '$145', tag: 'New Drop', color: '#d94f2b', bg: 'from-[#1a0e0a] to-[#0f0a08]' },
+  { id: 3, name: 'AETHER HOODIE', price: '$120', tag: 'Limited', color: '#c8ff00', bg: 'from-[#0e0e1a] to-[#0a0a0f]' },
+  { id: 4, name: 'PHANTOM JACKET', price: '$220', tag: 'Coming Soon', color: '#a09a8e', bg: 'from-[#111110] to-[#0a0909]' },
 ]
 
 export default function Products() {
   return (
-    <section id="products" className="py-32 px-6 bg-[#0a0909]">
+    <section id="products" className="py-36 px-6 bg-[#0a0909]">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] block mb-4">The Collection</span>
             <h2 className="font-display text-7xl md:text-9xl leading-none text-[#e8e0d0]">PIECES</h2>
           </div>
-          <p className="text-[#a09a8e] text-sm max-w-xs leading-relaxed tracking-wide md:text-right">Every piece is built to blur the line between where you are and where you are going.</p>
+          <div className="flex flex-col items-start md:items-end gap-3">
+            <p className="text-[#a09a8e] text-base max-w-xs leading-relaxed md:text-right">Every piece is something we would wear ourselves.</p>
+            <SizeGuide />
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {products.map((product) => (
