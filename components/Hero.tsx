@@ -9,14 +9,14 @@ export default function Hero() {
         <div className="mb-4">
           <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] fade-up fade-up-delay-1">First Drop Coming</span>
         </div>
-        <h1 className="font-display text-[15vw] md:text-[11vw] leading-[0.85] tracking-tight mb-10 fade-up fade-up-delay-2">
+        <h1 className="font-display text-[18vw] sm:text-[15vw] md:text-[11vw] leading-[0.9] tracking-tight mb-10 fade-up fade-up-delay-2">
           <span className="glitch block text-[#e8e0d0]" data-text="BEYOND">BEYOND</span>
           <span className="block text-[#e8e0d0]">THE</span>
           <span className="block text-[#c8ff00]">ORDINARY.</span>
         </h1>
-        <div className="flex flex-col md:flex-row items-start md:items-end gap-8 fade-up fade-up-delay-3">
+        <div className="flex flex-col items-start gap-6 fade-up fade-up-delay-3">
           <p className="text-[#a09a8e] text-base leading-relaxed max-w-xs">Clothes we actually want to wear. Built for people who are tired of wearing the same thing as everyone else.</p>
-          <div className="flex gap-4 items-center">
+          <div className="flex flex-wrap gap-4 items-center">
             <a href="#products" className="group flex items-center gap-3 text-xs tracking-[0.2em] uppercase px-8 py-4 bg-[#c8ff00] text-[#0a0909] font-bold hover:bg-[#e8e0d0] transition-all duration-300">
               See the pieces
               <span className="group-hover:translate-x-1 transition-transform">-&gt;</span>
