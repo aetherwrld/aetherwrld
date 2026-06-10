@@ -18,7 +18,7 @@ export default function Nav() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0909]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#" className="flex items-center">
-          <Image src="/logo.png" alt="AETHERWRLD" width={140} height={50} className="object-contain" />
+          <Image src="/logo.png" alt="AETHERWRLD" width={120} height={40} className="object-contain mix-blend-lighten" />
         </a>
         <div className="hidden md:flex items-center gap-10">
           {links.map((link) => (
@@ -33,7 +33,7 @@ export default function Nav() {
         </button>
       </div>
       <div className={`md:hidden transition-all duration-500 overflow-hidden ${menuOpen ? 'max-h-60' : 'max-h-0'}`}>
-        <div className="px-6 pb-6 flex flex-col gap-6 border-t border-white/5">
+        <div className="px-6 pb-6 flex flex-col gap-6 border-t border-white/5 bg-[#0a0909]">
           {links.map((link) => (
             <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="text-sm tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors pt-4">{link}</a>
           ))}

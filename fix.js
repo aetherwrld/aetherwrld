@@ -1,39 +1,49 @@
 const fs = require('fs');
 
-const hero = `export default function Hero() {
+const nav = `'use client'
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+
+export default function Nav() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  const links = ['Products', 'About', 'Contact']
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-end pb-24 px-6 overflow-hidden bg-[#0a0909]">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0909] via-transparent to-[#0a0909]" style={{ zIndex: 1 }} />
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none" style={{ zIndex: 0 }}>
-        <span className="font-display text-[22vw] leading-none text-white/[0.025] tracking-tighter">AETHER</span>
-      </div>
-      <div className="relative max-w-7xl mx-auto w-full" style={{ zIndex: 2 }}>
-        <div className="mb-4">
-          <span className="text-[11px] tracking-[0.4em] uppercase text-[#c8ff00] fade-up fade-up-delay-1">First Drop Coming</span>
+    <nav className={\`fixed top-0 left-0 right-0 z-50 transition-all duration-500 \${scrolled ? 'bg-[#0a0909]/90 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}\`}>
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="#" className="flex items-center">
+          <Image src="/logo.png" alt="AETHERWRLD" width={120} height={40} className="object-contain mix-blend-lighten" />
+        </a>
+        <div className="hidden md:flex items-center gap-10">
+          {links.map((link) => (
+            <a key={link} href={\`#\${link.toLowerCase()}\`} className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">{link}</a>
+          ))}
+          <a href="#contact" className="text-xs tracking-[0.2em] uppercase px-5 py-2.5 border border-[#c8ff00] text-[#c8ff00] hover:bg-[#c8ff00] hover:text-[#0a0909] transition-all duration-300">Shop Now</a>
         </div>
-        <h1 className="font-display text-[18vw] sm:text-[15vw] md:text-[11vw] leading-[0.9] tracking-tight mb-10 fade-up fade-up-delay-2">
-          <span className="glitch block text-[#e8e0d0]" data-text="BEYOND">BEYOND</span>
-          <span className="block text-[#e8e0d0]">THE</span>
-          <span className="block text-[#c8ff00]">ORDINARY.</span>
-        </h1>
-        <div className="flex flex-col items-start gap-6 fade-up fade-up-delay-3">
-          <p className="text-[#a09a8e] text-base leading-relaxed max-w-xs">Clothes we actually want to wear. Built for people who are tired of wearing the same thing as everyone else.</p>
-          <div className="flex flex-wrap gap-4 items-center">
-            <a href="#products" className="group flex items-center gap-3 text-xs tracking-[0.2em] uppercase px-8 py-4 bg-[#c8ff00] text-[#0a0909] font-bold hover:bg-[#e8e0d0] transition-all duration-300">
-              See the pieces
-              <span className="group-hover:translate-x-1 transition-transform">-&gt;</span>
-            </a>
-            <a href="#about" className="text-xs tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#e8e0d0] transition-colors">Our story</a>
-          </div>
+        <button className="md:hidden flex flex-col gap-1.5 p-2" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'rotate-45 translate-y-2' : ''}\`} />
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? 'opacity-0' : ''}\`} />
+          <span className={\`block w-6 h-px bg-[#e8e0d0] transition-all duration-300 \${menuOpen ? '-rotate-45 -translate-y-2' : ''}\`} />
+        </button>
+      </div>
+      <div className={\`md:hidden transition-all duration-500 overflow-hidden \${menuOpen ? 'max-h-60' : 'max-h-0'}\`}>
+        <div className="px-6 pb-6 flex flex-col gap-6 border-t border-white/5 bg-[#0a0909]">
+          {links.map((link) => (
+            <a key={link} href={\`#\${link.toLowerCase()}\`} onClick={() => setMenuOpen(false)} className="text-sm tracking-[0.2em] uppercase text-[#a09a8e] hover:text-[#c8ff00] transition-colors pt-4">{link}</a>
+          ))}
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ zIndex: 2 }}>
-        <span className="text-[9px] tracking-[0.4em] uppercase text-[#a09a8e]">Scroll</span>
-        <div className="w-px h-10 bg-gradient-to-b from-[#a09a8e] to-transparent animate-pulse" />
-      </div>
-    </section>
+    </nav>
   )
 }`;
 
-fs.writeFileSync('components/Hero.tsx', hero, 'utf8');
-console.log('Hero fixed!');
+fs.writeFileSync('components/Nav.tsx', nav, 'utf8');
+console.log('Nav fixed!');
